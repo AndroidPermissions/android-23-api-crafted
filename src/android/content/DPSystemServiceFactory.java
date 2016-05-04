@@ -18,6 +18,8 @@ public class DPSystemServiceFactory {
     public static String getSystemServiceName(Class<?> serviceClass) {
         if (serviceClass == WindowManager.class) {
             return Context.WINDOW_SERVICE;
+        } else if (serviceClass == LocationManager.class) {
+            return Context.LOCATION_SERVICE;
         } else {
             return null;
         }
@@ -77,23 +79,41 @@ public class DPSystemServiceFactory {
      */
     public static Object getSystemService(String name) {
         switch (name) {
-            /*
-            * @see #LOCATION_SERVICE
-            * @see android.location.LocationManager
-            * */
             case Context.WINDOW_SERVICE:
                 return new WindowManagerStub();
             case Context.LOCATION_SERVICE:
-                //todo create a clean android.jar lib that doesn't contain this and other crafted classes
-                //use it as dependency of this project
-                Class<?> clazz = LocationManager.class;
-                try {
-                    return clazz.newInstance();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                return new LocationManager();
             default:
                 return null;
+        }
+    }
+
+    /**
+     * Return the handle to a system-level service by class. <p> Note: System services obtained via this API may be
+     * closely associated with the Context in which they are obtained from.  In general, do not share the service
+     * objects between various different contexts (Activities, Applications, Services, Providers, etc.) </p>
+     *
+     * @param serviceClass The class of the desired service.
+     * @return The service or null if the class is not a supported system service.
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T getSystemService(Class<T> serviceClass) {
+        //Original implementation:
+
+        // Because subclasses may override getSystemService(String) we cannot
+        // perform a lookup by class alone.  We must first map the class to its
+        // service name then invoke the string-based method.
+        //String serviceName = getSystemServiceName(serviceClass);
+        //return serviceName != null ? (T)getSystemService(serviceName) : null;
+
+        try {
+            if (serviceClass == LocationManager.class) {
+                return (T) new LocationManager();  //works
+                //return (T) LocationManager.class.newInstance(); //doesn't work
+            }
+            return serviceClass.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

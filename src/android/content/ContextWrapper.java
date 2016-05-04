@@ -473,16 +473,6 @@ public class ContextWrapper extends Context {
     }
 
     @Override
-    public Object getSystemService(String name) {
-        return DPSystemServiceFactory.getSystemService(name);
-    }
-
-    @Override
-    public String getSystemServiceName(Class<?> serviceClass) {
-        return DPSystemServiceFactory.getSystemServiceName(serviceClass);
-    }
-
-    @Override
     public int checkPermission(String permission, int pid, int uid) {
         return mBase.checkPermission(permission, pid, uid);
     }

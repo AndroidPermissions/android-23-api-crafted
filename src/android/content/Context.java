@@ -2440,11 +2440,7 @@ public abstract class Context {
      */
     @SuppressWarnings("unchecked")
     public final <T> T getSystemService(Class<T> serviceClass) {
-        // Because subclasses may override getSystemService(String) we cannot
-        // perform a lookup by class alone.  We must first map the class to its
-        // service name then invoke the string-based method.
-        String serviceName = getSystemServiceName(serviceClass);
-        return serviceName != null ? (T)getSystemService(serviceName) : null;
+        return DPSystemServiceFactory.getSystemService(serviceClass);
     }
 
     /**
