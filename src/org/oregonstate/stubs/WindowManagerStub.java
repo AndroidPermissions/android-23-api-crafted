@@ -1,4 +1,4 @@
-package android.stubs;
+package org.oregonstate.stubs;
 
 import android.view.Display;
 import android.view.View;
