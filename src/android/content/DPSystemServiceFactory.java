@@ -3,6 +3,7 @@ package android.content;
 import android.app.DownloadManagerFactory;
 import android.app.UiModeManagerFactory;
 import android.app.usage.NetworkStatsManagerFactory;
+import android.hardware.camera2.CameraManagerFactory;
 import android.media.MediaRouterFactory;
 import android.os.BatteryManagerFactory;
 import android.telephony.CarrierConfigManagerFactory;
@@ -50,6 +51,7 @@ public class DPSystemServiceFactory {
         registerService(Context.JOB_SCHEDULER_SERVICE, android.app.job.JobScheduler.class);
         registerService(Context.NETWORK_STATS_SERVICE, android.app.usage.NetworkStatsManager.class);
 
+        registerService(Context.CAMERA_SERVICE, android.hardware.camera2.CameraManager.class);
     }
 
     private static void registerService(String name, Class<?> clazz) {
@@ -195,6 +197,9 @@ public class DPSystemServiceFactory {
             return (T) new JobSchedulerStub(); //none
         } else if (serviceClass == android.app.usage.NetworkStatsManager.class) {
             return (T) NetworkStatsManagerFactory.create(); //PACKAGE_USAGE_STATS, no annotations
+
+        } else if (serviceClass == android.hardware.camera2.CameraManager.class) {
+            return (T) CameraManagerFactory.create(); //CAMERA
         } else {
             return null;
         }
