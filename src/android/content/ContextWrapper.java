@@ -71,7 +71,7 @@ public class ContextWrapper extends Context {
      * @return the base context as set by the constructor or setBaseContext
      */
     public Context getBaseContext() {
-        return mBase;
+        return this;
     }
 
     @Override
@@ -102,7 +102,7 @@ public class ContextWrapper extends Context {
 
     @Override
     public Context getApplicationContext() {
-        return mBase.getApplicationContext();
+        return this;
     }
 
     @Override
@@ -571,17 +571,17 @@ public class ContextWrapper extends Context {
     @Override
     public Context createPackageContext(String packageName, int flags)
             throws PackageManager.NameNotFoundException {
-        return mBase.createPackageContext(packageName, flags);
+        return this;
     }
 
     @Override
     public Context createConfigurationContext(Configuration overrideConfiguration) {
-        return mBase.createConfigurationContext(overrideConfiguration);
+        return this;
     }
 
     @Override
     public Context createDisplayContext(Display display) {
-        return mBase.createDisplayContext(display);
+        return this;
     }
 
     @Override
@@ -685,13 +685,13 @@ public class ContextWrapper extends Context {
     @Override
     public Context createPackageContextAsUser(String packageName, int flags, UserHandle user)
             throws PackageManager.NameNotFoundException {
-        return null;
+        return this;
     }
 
     @Override
     public Context createApplicationContext(ApplicationInfo application, int flags)
             throws PackageManager.NameNotFoundException {
-        return null;
+        return this;
     }
 
     @Override
