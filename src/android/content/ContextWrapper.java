@@ -27,19 +27,10 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.UserHandle;
+import android.os.*;
 import android.view.Display;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * Proxying implementation of Context that simply delegates all of its calls to
@@ -164,7 +155,7 @@ public class ContextWrapper extends Context {
 
     @Override
     public File getFileStreamPath(String name) {
-        return mBase.getFileStreamPath(name);
+        return new File("mock" + name);
     }
 
     @Override
@@ -174,62 +165,62 @@ public class ContextWrapper extends Context {
 
     @Override
     public File getFilesDir() {
-        return mBase.getFilesDir();
+        return new File("mock");
     }
 
     @Override
     public File getNoBackupFilesDir() {
-        return mBase.getNoBackupFilesDir();
+        return new File("mock");
     }
 
     @Override
     public File getExternalFilesDir(String type) {
-        return mBase.getExternalFilesDir(type);
+        return new File("mock");
     }
 
     @Override
     public File[] getExternalFilesDirs(String type) {
-        return mBase.getExternalFilesDirs(type);
+        return new File[]{new File("mock")};
     }
 
     @Override
     public File getObbDir() {
-        return mBase.getObbDir();
+        return new File("mock");
     }
 
     @Override
     public File[] getObbDirs() {
-        return mBase.getObbDirs();
+        return new File[]{new File("mock")};
     }
 
     @Override
     public File getCacheDir() {
-        return mBase.getCacheDir();
+        return new File("mock"); //ensures result points-to is not empty. Maybe helps.
     }
 
     @Override
     public File getCodeCacheDir() {
-        return mBase.getCodeCacheDir();
+        return new File("mock");
     }
 
     @Override
     public File getExternalCacheDir() {
-        return mBase.getExternalCacheDir();
+        return new File("mock");
     }
 
     @Override
     public File[] getExternalCacheDirs() {
-        return mBase.getExternalCacheDirs();
+        return new File[]{new File("mock")};
     }
 
     @Override
     public File[] getExternalMediaDirs() {
-        return mBase.getExternalMediaDirs();
+        return new File[]{new File("mock")};
     }
 
     @Override
     public File getDir(String name, int mode) {
-        return mBase.getDir(name, mode);
+        return new File("mock" + name);
     }
 
     @Override
@@ -250,7 +241,7 @@ public class ContextWrapper extends Context {
 
     @Override
     public File getDatabasePath(String name) {
-        return mBase.getDatabasePath(name);
+        return new File("mock" + name);
     }
 
     @Override
@@ -605,7 +596,7 @@ public class ContextWrapper extends Context {
 
     @Override
     public File getSharedPrefsFile(String name) {
-        return null;
+        return new File("mock" + name);
     }
 
     @Override
