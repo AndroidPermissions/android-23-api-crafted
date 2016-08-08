@@ -1,11 +1,13 @@
 package android.content;
 
+import android.accounts.AccountManagerFactory;
 import android.app.DownloadManagerFactory;
 import android.app.UiModeManagerFactory;
 import android.app.usage.NetworkStatsManagerFactory;
 import android.hardware.camera2.CameraManagerFactory;
 import android.media.MediaRouterFactory;
 import android.os.BatteryManagerFactory;
+import android.telecom.TelecomManagerFactory;
 import android.telephony.CarrierConfigManagerFactory;
 import android.telephony.SubscriptionManagerFactory;
 import android.telephony.TelephonyManagerFactory;
@@ -52,6 +54,8 @@ public class DPSystemServiceFactory {
         registerService(Context.NETWORK_STATS_SERVICE, android.app.usage.NetworkStatsManager.class);
 
         registerService(Context.CAMERA_SERVICE, android.hardware.camera2.CameraManager.class);
+        registerService(Context.ACCOUNT_SERVICE, android.accounts.AccountManager.class);
+        registerService(Context.TELECOM_SERVICE, android.telecom.TelecomManager.class);
     }
 
     private static void registerService(String name, Class<?> clazz) {
@@ -200,6 +204,10 @@ public class DPSystemServiceFactory {
 
         } else if (serviceClass == android.hardware.camera2.CameraManager.class) {
             return (T) CameraManagerFactory.create(); //CAMERA
+        } else if (serviceClass == android.accounts.AccountManager.class) {
+            return (T) AccountManagerFactory.create(); //GET_ACCOUNTS
+        } else if (serviceClass == android.telecom.TelecomManager.class) {
+            return (T) TelecomManagerFactory.create(); //READ_PHONE_STATE
         } else {
             return null;
         }
