@@ -5,24 +5,9 @@
 
 package android.app;
 
-import android.app.ActionBar;
-import android.app.Application;
-import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.LoaderManager;
-import android.app.PendingIntent;
-import android.app.SharedElementCallback;
-import android.app.TaskStackBuilder;
-import android.app.VoiceInteractor;
 import android.app.ActivityManager.TaskDescription;
 import android.app.assist.AssistContent;
-import android.content.ComponentCallbacks2;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentSender;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.IntentSender.SendIntentException;
 import android.content.res.Configuration;
 import android.content.res.Resources.Theme;
@@ -37,19 +22,7 @@ import android.os.PersistableBundle;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
-import android.view.ActionMode;
-import android.view.ContextMenu;
-import android.view.ContextThemeWrapper;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.SearchEvent;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater.Factory2;
 import android.view.View.OnCreateContextMenuListener;
@@ -57,10 +30,14 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window.Callback;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toolbar;
+import org.oregonstate.stubs.LayoutInflaterStub;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-public class Activity extends ContextThemeWrapper implements Factory2, Callback, android.view.KeyEvent.Callback, OnCreateContextMenuListener, ComponentCallbacks2 {
+public class Activity extends ContextThemeWrapper
+        implements Factory2, Callback, android.view.KeyEvent.Callback, OnCreateContextMenuListener,
+        ComponentCallbacks2 {
     public static final int DEFAULT_KEYS_DIALER = 1;
     public static final int DEFAULT_KEYS_DISABLE = 0;
     public static final int DEFAULT_KEYS_SEARCH_GLOBAL = 4;
@@ -76,7 +53,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public Intent getIntent() {
-        throw new RuntimeException("Stub!");
+        return new Intent("");
     }
 
     public void setIntent(Intent newIntent) {
@@ -84,7 +61,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public final Application getApplication() {
-        throw new RuntimeException("Stub!");
+        return new Application();
     }
 
     public final boolean isChild() {
@@ -92,11 +69,36 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public final Activity getParent() {
-        throw new RuntimeException("Stub!");
+        return this;
     }
 
     public WindowManager getWindowManager() {
-        throw new RuntimeException("Stub!");
+        return new WindowManager() {
+            @Override
+            public Display getDefaultDisplay() {
+                return null;
+            }
+
+            @Override
+            public void removeViewImmediate(View view) {
+
+            }
+
+            @Override
+            public void addView(View view, ViewGroup.LayoutParams layoutParams) {
+
+            }
+
+            @Override
+            public void updateViewLayout(View view, ViewGroup.LayoutParams layoutParams) {
+
+            }
+
+            @Override
+            public void removeView(View view) {
+
+            }
+        };
     }
 
     public Window getWindow() {
@@ -104,11 +106,36 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public LoaderManager getLoaderManager() {
-        throw new RuntimeException("Stub!");
+        return new LoaderManager() {
+            @Override
+            public <D> Loader<D> initLoader(int i, Bundle bundle, LoaderCallbacks<D> loaderCallbacks) {
+                return null;
+            }
+
+            @Override
+            public <D> Loader<D> restartLoader(int i, Bundle bundle, LoaderCallbacks<D> loaderCallbacks) {
+                return null;
+            }
+
+            @Override
+            public void destroyLoader(int i) {
+
+            }
+
+            @Override
+            public <D> Loader<D> getLoader(int i) {
+                return null;
+            }
+
+            @Override
+            public void dump(String s, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strings) {
+
+            }
+        };
     }
 
     public View getCurrentFocus() {
-        throw new RuntimeException("Stub!");
+        return new View(null);
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +191,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public VoiceInteractor getVoiceInteractor() {
-        throw new RuntimeException("Stub!");
+        return new VoiceInteractor();
     }
 
     protected void onNewIntent(Intent intent) {
@@ -192,7 +219,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public CharSequence onCreateDescription() {
-        throw new RuntimeException("Stub!");
+        return "";
     }
 
     public void onProvideAssistData(Bundle data) {
@@ -227,13 +254,17 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public Object getLastNonConfigurationInstance() {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public Object onRetainNonConfigurationInstance() {
         throw new RuntimeException("Stub!");
@@ -248,33 +279,136 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public FragmentManager getFragmentManager() {
-        throw new RuntimeException("Stub!");
+        return new FragmentManager() {
+            @Override
+            public FragmentTransaction beginTransaction() {
+                return null;
+            }
+
+            @Override
+            public boolean executePendingTransactions() {
+                return false;
+            }
+
+            @Override
+            public Fragment findFragmentById(int i) {
+                return null;
+            }
+
+            @Override
+            public Fragment findFragmentByTag(String s) {
+                return null;
+            }
+
+            @Override
+            public void popBackStack() {
+
+            }
+
+            @Override
+            public boolean popBackStackImmediate() {
+                return false;
+            }
+
+            @Override
+            public void popBackStack(String s, int i) {
+
+            }
+
+            @Override
+            public boolean popBackStackImmediate(String s, int i) {
+                return false;
+            }
+
+            @Override
+            public void popBackStack(int i, int i1) {
+
+            }
+
+            @Override
+            public boolean popBackStackImmediate(int i, int i1) {
+                return false;
+            }
+
+            @Override
+            public int getBackStackEntryCount() {
+                return 0;
+            }
+
+            @Override
+            public BackStackEntry getBackStackEntryAt(int i) {
+                return null;
+            }
+
+            @Override
+            public void addOnBackStackChangedListener(OnBackStackChangedListener onBackStackChangedListener) {
+
+            }
+
+            @Override
+            public void removeOnBackStackChangedListener(
+                    OnBackStackChangedListener onBackStackChangedListener) {
+
+            }
+
+            @Override
+            public void putFragment(Bundle bundle, String s, Fragment fragment) {
+
+            }
+
+            @Override
+            public Fragment getFragment(Bundle bundle, String s) {
+                return null;
+            }
+
+            @Override
+            public Fragment.SavedState saveFragmentInstanceState(Fragment fragment) {
+                return null;
+            }
+
+            @Override
+            public boolean isDestroyed() {
+                return false;
+            }
+
+            @Override
+            public void dump(String s, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strings) {
+
+            }
+        };
     }
 
     public void onAttachFragment(Fragment fragment) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
-    public final Cursor managedQuery(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public final Cursor managedQuery(Uri uri, String[] projection, String selection, String[] selectionArgs,
+                                     String sortOrder) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public void startManagingCursor(Cursor c) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public void stopManagingCursor(Cursor c) {
         throw new RuntimeException("Stub!");
     }
 
     public View findViewById(int id) {
-        throw new RuntimeException("Stub!");
+        return new View(null);
     }
 
     public ActionBar getActionBar() {
@@ -302,7 +436,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public TransitionManager getContentTransitionManager() {
-        throw new RuntimeException("Stub!");
+        return new TransitionManager();
     }
 
     public void setContentTransitionManager(TransitionManager tm) {
@@ -310,7 +444,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public Scene getContentScene() {
-        throw new RuntimeException("Stub!");
+        return new Scene(null);
     }
 
     public void setFinishOnTouchOutside(boolean finish) {
@@ -410,7 +544,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public View onCreatePanelView(int featureId) {
-        throw new RuntimeException("Stub!");
+        return findViewById(featureId);
     }
 
     public boolean onCreatePanelMenu(int featureId, Menu menu) {
@@ -505,49 +639,65 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     protected Dialog onCreateDialog(int id) {
-        throw new RuntimeException("Stub!");
+        return new Dialog(this);
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     protected Dialog onCreateDialog(int id, Bundle args) {
-        throw new RuntimeException("Stub!");
+        return new Dialog(this);
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     protected void onPrepareDialog(int id, Dialog dialog) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public final void showDialog(int id) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public final boolean showDialog(int id, Bundle args) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public final void dismissDialog(int id) {
         throw new RuntimeException("Stub!");
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public final void removeDialog(int id) {
         throw new RuntimeException("Stub!");
@@ -565,7 +715,8 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
         throw new RuntimeException("Stub!");
     }
 
-    public void startSearch(String initialQuery, boolean selectInitialQuery, Bundle appSearchData, boolean globalSearch) {
+    public void startSearch(String initialQuery, boolean selectInitialQuery, Bundle appSearchData,
+                            boolean globalSearch) {
         throw new RuntimeException("Stub!");
     }
 
@@ -598,11 +749,11 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public LayoutInflater getLayoutInflater() {
-        throw new RuntimeException("Stub!");
+        return new LayoutInflaterStub();
     }
 
     public MenuInflater getMenuInflater() {
-        throw new RuntimeException("Stub!");
+        return new MenuInflater(this);
     }
 
     protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
@@ -629,11 +780,13 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
         throw new RuntimeException("Stub!");
     }
 
-    public void startIntentSenderForResult(IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags) throws SendIntentException {
+    public void startIntentSenderForResult(IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask,
+                                           int flagsValues, int extraFlags) throws SendIntentException {
         throw new RuntimeException("Stub!");
     }
 
-    public void startIntentSenderForResult(IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws SendIntentException {
+    public void startIntentSenderForResult(IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask,
+                                           int flagsValues, int extraFlags, Bundle options) throws SendIntentException {
         throw new RuntimeException("Stub!");
     }
 
@@ -653,11 +806,13 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
         throw new RuntimeException("Stub!");
     }
 
-    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags) throws SendIntentException {
+    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues,
+                                  int extraFlags) throws SendIntentException {
         throw new RuntimeException("Stub!");
     }
 
-    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws SendIntentException {
+    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues,
+                                  int extraFlags, Bundle options) throws SendIntentException {
         throw new RuntimeException("Stub!");
     }
 
@@ -693,11 +848,14 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
         throw new RuntimeException("Stub!");
     }
 
-    public void startIntentSenderFromChild(Activity child, IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags) throws SendIntentException {
+    public void startIntentSenderFromChild(Activity child, IntentSender intent, int requestCode, Intent fillInIntent,
+                                           int flagsMask, int flagsValues, int extraFlags) throws SendIntentException {
         throw new RuntimeException("Stub!");
     }
 
-    public void startIntentSenderFromChild(Activity child, IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws SendIntentException {
+    public void startIntentSenderFromChild(Activity child, IntentSender intent, int requestCode, Intent fillInIntent,
+                                           int flagsMask, int flagsValues, int extraFlags, Bundle options)
+            throws SendIntentException {
         throw new RuntimeException("Stub!");
     }
 
@@ -726,7 +884,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public ComponentName getCallingActivity() {
-        throw new RuntimeException("Stub!");
+        return new ComponentName("", "");
     }
 
     public void setVisible(boolean visible) {
@@ -790,7 +948,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public PendingIntent createPendingResult(int requestCode, Intent data, int flags) {
-        throw new RuntimeException("Stub!");
+        return new PendingIntent();
     }
 
     public void setRequestedOrientation(int requestedOrientation) {
@@ -818,7 +976,7 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public ComponentName getComponentName() {
-        throw new RuntimeException("Stub!");
+        return new ComponentName("", "");
     }
 
     public SharedPreferences getPreferences(int mode) {
@@ -900,11 +1058,11 @@ public class Activity extends ContextThemeWrapper implements Factory2, Callback,
     }
 
     public View onCreateView(String name, Context context, AttributeSet attrs) {
-        throw new RuntimeException("Stub!");
+        return new View(this);
     }
 
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
-        throw new RuntimeException("Stub!");
+        return new View(this);
     }
 
     public void dump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
