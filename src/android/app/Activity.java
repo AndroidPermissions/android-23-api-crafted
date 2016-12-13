@@ -53,7 +53,7 @@ public class Activity extends ContextThemeWrapper
     }
 
     public Intent getIntent() {
-        return new Intent("");
+        return null;
     }
 
     public void setIntent(Intent newIntent) {
