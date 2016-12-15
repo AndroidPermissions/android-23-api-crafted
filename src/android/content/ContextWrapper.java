@@ -28,6 +28,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.*;
+import android.test.mock.MockContentResolver;
 import android.view.Display;
 
 import java.io.*;
@@ -83,7 +84,7 @@ public class ContextWrapper extends Context {
 
     @Override
     public ContentResolver getContentResolver() {
-        return mBase.getContentResolver();
+        return new MockContentResolver();
     }
 
     @Override
